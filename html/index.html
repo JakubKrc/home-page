@@ -1,12 +1,105 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Server Homepage</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+
+  <nav>
+    <div class="left">
+      <a href="/">Homepage</a>
+    </div>
+    <div class="right">
+
+      <a href="https://github.com/JakubKrc" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-github"></i>
+        <span>Github</span>
+      </a>
+
+      <a href="mailto:bla@example.com" target="_blank">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Email</span>
+      </a>
+
+    </div>
+  </nav>
+
   <h1>Welcome!</h1>
- <!-- <p><a href="/crudapp/">Go to CRUD App</a></p>-->
+
+  <div id="repos-container"></div>
+
+  <script>
+  
+    var repos = ["crud-for-testing","mandelbrot","planet-far-away-js","2d-platformer-engine-prototype"];
+
+    repos.map( (repo) => {
+
+      const div = document.createElement("div");
+      div.className = "repo";          
+
+      const spanName = document.createElement("span")
+      spanName.textContent = repo;
+      spanName.className = "repo-name"
+      div.appendChild(spanName);
+
+      const spanDesc = document.createElement("span");
+      spanDesc.className = "repo-desc"
+      div.appendChild(spanDesc);
+
+      const divForLinks = document.createElement("div")
+      divForLinks.className = "div-for-links"
+      div.appendChild(divForLinks)
+
+      const repoIgithub = document.createElement("i")
+      repoIgithub.className = "fa-brands fa-github"
+
+      const repoLink = document.createElement("a");
+      repoLink.appendChild(repoIgithub)
+      repoLink.href = `https://github.com/JakubKrc/${repo}`;
+      repoLink.target = "_blank";
+      repoLink.style.fontWeight = "bold";
+      repoLink.appendChild(document.createTextNode(`Repository`));
+      divForLinks.appendChild(repoLink);
+
+      const repoIstart = document.createElement("i")
+      repoIstart.className = "fa-solid fa-hourglass-start"
+
+      const appLink = document.createElement("a");
+      appLink.appendChild(repoIstart)
+      appLink.href = `https://95.217.189.31/${repo}`;
+      appLink.target = "_blank";
+      appLink.style.fontWeight = "bold";
+      appLink.appendChild(document.createTextNode(`Try in browser`));
+      divForLinks.appendChild(appLink);
+
+      document.getElementById('repos-container').appendChild(div);
+      
+      fetch(`https://api.github.com/repos/JakubKrc/${repo}`, {
+      /*headers: token ? { Authorization: `token ${token}` } : {}*/
+      })
+        .then(response => response.json())
+        .then(data => {
+          const description = data.description || "No description available.";
+          spanDesc.textContent = description;
+        })
+        .catch(error => {
+          console.error("Error fetching repo description:", error);
+          document.getElementById("repo-description").textContent =
+            "Failed to fetch description. Check the console for errors.";
+        });
+      })
+
+  </script>
+
+  <!-- <p><a href="/crudapp/">Go to CRUD App</a></p>
   <p><a href="http://95.217.189.31:81">CRUD App</a></p>
-  <p><a href="http://95.217.189.31:82">PlanetFarAway-Js</a></p>
+  <p><a href="http://95.217.189.31/planetfarawayjs">PlanetFarAway-Js</a></p>-->
+
 </body>
+
 </html>

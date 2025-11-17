@@ -1,0 +1,127 @@
+:root{
+    --text-color: #212529;
+    --link-color: #307fa3;
+    --backgroungd-color: #F8F9FA;
+    --bgcolor-repo: #FFFFFF;
+    
+    margin: 0 auto;
+    text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #E0E0E0;
+        --link-color: #6EA8FF;
+        --backgroungd-color: #121212;
+        --bgcolor-repo: #2e2e2e;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--backgroungd-color);
+    color: var(--text-color);
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    height: 80px;
+}
+
+nav .left a {
+    color: var(--text-color);
+    font-size: 22px;
+    font-weight: 600;
+}
+
+nav .right a {
+    color: var(--text-color);
+    margin: 0 10px;
+}
+
+nav .right a:last-child {
+    color: var(--backgroungd-color);
+    background-color: var(--text-color);
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+nav .right a span {
+    margin-left: 5px;
+}
+
+@media (max-width: 600px){
+
+    nav {
+        padding: 0 20px;
+    }
+
+    nav .right a {
+        font-size: 22px;
+    }
+
+    nav .right a:last-child {
+        color: var(--text-color);
+        background-color: var(--backgroungd-color);
+        padding: 0;
+    }
+
+    nav .right a span {
+        display: none;
+    }
+
+}
+
+#repos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+.repo {
+    display: flex;
+    flex-direction: column;
+    border: #16141418 3px solid;
+    background-color: var(--bgcolor-repo);
+    width: 80%;
+    max-width: 700px;
+    padding: 1.5%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.repo .repo-name {
+    font-weight: 600;
+    font-size: large;
+    padding-bottom: 15px;
+}
+
+.repo .repo-desc {
+    text-align: left;
+    padding-bottom: 15px;
+}
+
+.repo .div-for-links {
+    display: flex;
+    justify-content: space-between;
+}
