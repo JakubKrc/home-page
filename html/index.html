@@ -12,7 +12,10 @@
 
   <nav>
     <div class="left">
-      <a href="/">Homepage</a>
+      <button id="theme-toggle">
+          <i class="fa-solid fa-moon"></i>
+          Dark mode
+      </button>
     </div>
     <div class="right">
 
@@ -34,6 +37,60 @@
   <div id="repos-container"></div>
 
   <script>
+
+    const btn = document.getElementById("theme-toggle");
+    const themes = ["light", "dark", "system"];
+
+    let theme = localStorage.getItem("theme") || "system";
+
+    applyTheme(theme);
+    updateButtonText(theme);
+
+    btn.addEventListener("click", () => {
+        const index = themes.indexOf(theme);
+        theme = themes[(index + 1) % themes.length];
+
+        localStorage.setItem("theme", theme);
+        applyTheme(theme);
+        updateButtonText(theme);
+    });
+
+    function applyTheme(theme) {
+        if (theme === "system") {
+            applySystemTheme();
+        } else {
+            document.documentElement.setAttribute("data-theme", theme);
+        }
+    }
+
+    function applySystemTheme() {
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const systemTheme = prefersDark ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", systemTheme);
+    }
+
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+        if (theme === "system") {
+            applySystemTheme();
+        }
+    });
+
+    function updateButtonText(theme) {
+        const icon = btn.querySelector("i");
+        if (theme === "light") {
+            btn.textContent = "Light";
+            btn.prepend(icon);
+            icon.className = "fa-solid fa-lightbulb";
+        } else if (theme === "dark") {
+            btn.textContent = "Dark";
+            btn.prepend(icon);
+            icon.className = "fa-solid fa-moon";
+        } else if (theme === "system") {
+            btn.textContent = "System";
+            btn.prepend(icon);
+            icon.className = "fa-solid fa-laptop";
+        }
+    }
   
     var repos = ["crud-for-testing","mandelbrot","planet-far-away-js","2d-platformer-engine-prototype"];
 
