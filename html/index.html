@@ -24,7 +24,7 @@
         <span>Github</span>
       </a>
 
-      <a href="mailto:bla@example.com" target="_blank">
+      <a href="#contact-form" id="email-button">
         <i class="fa-solid fa-envelope"></i>
         <span>Email</span>
       </a>
@@ -161,38 +161,47 @@
           document.getElementById("repo-description").textContent =
             "Failed to fetch description. Check the console for errors.";
         });
-      })
+    })
 
-      const form = document.getElementById('contact-form')
-      const msg = document.getElementById('form-msg')
+    const form = document.getElementById('contact-form')
+    const msg = document.getElementById('form-msg')
 
-      form.addEventListener('submit', async function(e) {
-          e.preventDefault()
-          const formData = new FormData(form)
-          const action = form.action
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault()
+        const formData = new FormData(form)
+        const action = form.action
 
-          try {
-              const response = await fetch(action, {
-                  method: form.method,
-                  body: formData,
-                  headers: { 'Accept': 'application/json' }
-              })
+        try {
+            const response = await fetch(action, {
+                method: form.method,
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            })
 
-              if (response.ok) {
-                  msg.textContent = "Message sent! Thank you."
-                  form.reset();
+            if (response.ok) {
+                msg.textContent = "Message sent! Thank you."
+                form.reset();
+            } else {
+              const result = await response.json();
+              if (result.errors) {
+                msg.textContent = result.errors.map(e => e.message).join(", ");
               } else {
-                const result = await response.json();
-                if (result.errors) {
-                  msg.textContent = result.errors.map(e => e.message).join(", ");
-                } else {
-                  msg.textContent = "Oops! There was a problem submitting your form.";
-                }
+                msg.textContent = "Oops! There was a problem submitting your form.";
               }
-            } catch (error) {
-              msg.textContent = "Oops! There was a problem submitting your form.";
             }
-      })
+          } catch (error) {
+            msg.textContent = "Oops! There was a problem submitting your form.";
+          }
+    })
+    
+    document.getElementById("email-button").addEventListener("click", function() {
+      const form = document.getElementById("contact-form")
+
+      form.scrollIntoView({ behavior: "smooth", block: "center" })
+      setTimeout(() => {
+        form.querySelector("input, textarea, select").focus()
+      }, 300)
+    })
 
   </script>
 
