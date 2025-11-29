@@ -133,3 +133,50 @@ nav .right a span {
     display: flex;
     justify-content: space-between;
 }
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 670px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: var(--bgcolor-repo);
+    color: var(--text-color);
+}
+
+#contact-form input,
+#contact-form textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+#contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+#contact-form button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--text-color);
+    color: var(--background-color);
+    cursor: pointer;
+}
+
+#contact-form button:hover {
+    opacity: 0.8;
+}
+
+#contact-form p#form-msg {
+    font-size: 14px;
+    color: var(--link-color);
+    text-align: center;
+}
