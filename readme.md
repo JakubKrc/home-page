@@ -6,9 +6,7 @@ It includes a simple UI, light/dark/system theme switching, dynamic GitHub repo 
 
 ---
 
-## 🚀 Features
-
-### 🖥️ Hosting & Deployment
+## 🖥️ Hosting & Deployment
 
 This site runs on a Hetzner VPS using the following setup:
 
@@ -29,21 +27,21 @@ A minimal CI/CD workflow that:
 
 ---
 
-## 🔒 Security Notes
+### 🔒 Security Notes
 - SSL handled by Let's Encrypt
 - Contact form submits via secure Formspree endpoint  
 - Server access uses SSH keys only  
 
----
+## 🚀 Features
 
-## 📬 Contact Form
+#### 📬 Contact Form
 - Powered by Formspree  
 - Handles input validation + success/error states  
 - Smooth scroll to the form with automatic focus  
 
 ---
 
-## 📦 Dynamic Project List
+#### 📦 Dynamic Project List
 - Displays selected GitHub repositories automatically  
 - Fetches descriptions from the GitHub API  
 - Each item includes:
@@ -52,7 +50,7 @@ A minimal CI/CD workflow that:
 
 ---
 
-## 🎨 Theme Toggle
+#### 🎨 Theme Toggle
 - Light, Dark, and System modes  
 - Saves user preference in `localStorage`  
 - Realtime OS theme changes when set to System  
