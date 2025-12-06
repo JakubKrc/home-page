@@ -3,31 +3,36 @@
         "name":"Crud for testing",
         "name-of-git":"crud-for-testing",
         "demo-url":"crud-for-testing",
-        "desc":""
+        "desc":"",
+        "mobile-err":""
     },
     {
         "name":"Mandelbrot",
         "name-of-git":"mandelbrot",
         "demo-url":"mandelbrot",
-        "desc":""
+        "desc":"",
+        "mobile-err":"If this is a touch-only device, it won’t work."
     },
     {
         "name":"Planet far away - Godot Engine",
         "name-of-git":"planet-far-away-godot",
         "demo-url":"https://loosersoft.itch.io/planetfaraway?secret=BKpgSNWe28YBY5i3SjdUpTDls",
-        "desc":""
+        "desc":"",
+        "mobile-err":"If this is a touch-only device, it won’t work."
     },
     {
         "name":"Planet Far Away - JS",
         "name-of-git":"planet-far-away-js",
         "demo-url":"planet-far-away-js",
-        "desc":""
+        "desc":"",
+        "mobile-err":"If this is a touch-only device, it won’t work."
     },
     {
         "name":"2d platformer engine prototype",
         "name-of-git":"2d-platformer-engine-prototype",
         "demo-url":"2d-platformer-engine-prototype",
-        "desc":""
+        "desc":"",
+        "mobile-err":"If this is a touch-only device, it won’t work."
     }
 
 ]

@@ -113,7 +113,7 @@ nav .right a span {
     background-color: var(--bgcolor-repo);
     width: 80%;
     max-width: 700px;
-    padding: 1.5%;
+    padding: 1vh 1vw;
     border-radius: 15px;
     margin-bottom: 15px;
 }
@@ -179,4 +179,14 @@ nav .right a span {
     font-size: 14px;
     color: var(--link-color);
     text-align: center;
+}
+
+.mobile-err {
+  display: none;
+}
+
+.touch-device .mobile-err {
+  display: block;
+  color: rgb(170, 63, 63);
+  padding-top: 5px;
 }

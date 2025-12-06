@@ -18,3 +18,10 @@ fetch('https://api.github.com/users/octocat')
     console.log('Remaining loads of description of repositories:', response.headers.get('X-RateLimit-Remaining'));
     console.log('Reset Time:', new Date(response.headers.get('X-RateLimit-Reset') * 1000));
   });
+
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+
+if (isTouchDevice && isSmallScreen) {
+  document.documentElement.classList.add('touch-device');
+}

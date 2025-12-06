@@ -151,6 +151,13 @@
         appLink.appendChild(document.createTextNode(`Try in browser`));
         divForLinks.appendChild(appLink);
 
+        if(repo["mobile-err"] != ""){
+          const spanMobileErr = document.createElement("span")
+          spanMobileErr.textContent = repo["mobile-err"];
+          spanMobileErr.className = "mobile-err"
+          div.appendChild(spanMobileErr);
+        }
+
         document.getElementById('repos-container').appendChild(div);
         
         if (repo.desc != ""){
