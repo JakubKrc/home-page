@@ -7,6 +7,7 @@
   <title>JKJ dev</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="loadJSON.js"></script>
 </head>
 <body>
 
@@ -24,7 +25,7 @@
         <span>Github</span>
       </a>
 
-      <a href="#contact-form" id="email-button">
+      <a href="javascript:void(0)" id="email-button">
         <i class="fa-solid fa-envelope"></i>
         <span>Email</span>
       </a>
@@ -104,64 +105,76 @@
         }
     }
   
-    var repos = ["crud-for-testing","mandelbrot","planet-far-away-js","2d-platformer-engine-prototype"];
+    async function createProjects() {
 
-    repos.map( (repo) => {
+      const repos = await loadProjects()
+      repos.map( (repo) => repo["name-of-git"] = (repo["name-of-git"] == "") ? repo.name : repo["name-of-git"] )
+      repos.map( (repo) => repo["demo-url"] = (repo["demo-url"] == "") ? '/'+repo.name : repo["demo-url"])
 
-      const div = document.createElement("div");
-      div.className = "repo";          
+      repos.map( (repo) => {
 
-      const spanName = document.createElement("span")
-      spanName.textContent = repo;
-      spanName.className = "repo-name"
-      div.appendChild(spanName);
+        const div = document.createElement("div");
+        div.className = "repo";          
 
-      const spanDesc = document.createElement("span");
-      spanDesc.className = "repo-desc"
-      div.appendChild(spanDesc);
+        const spanName = document.createElement("span")
+        spanName.textContent = repo.name;
+        spanName.className = "repo-name"
+        div.appendChild(spanName);
 
-      const divForLinks = document.createElement("div")
-      divForLinks.className = "div-for-links"
-      div.appendChild(divForLinks)
+        const spanDesc = document.createElement("span");
+        spanDesc.className = "repo-desc"
+        div.appendChild(spanDesc);
 
-      const repoIgithub = document.createElement("i")
-      repoIgithub.className = "fa-brands fa-github"
+        const divForLinks = document.createElement("div")
+        divForLinks.className = "div-for-links"
+        div.appendChild(divForLinks)
 
-      const repoLink = document.createElement("a");
-      repoLink.appendChild(repoIgithub)
-      repoLink.href = `https://github.com/JakubKrc/${repo}`;
-      repoLink.target = "_blank";
-      repoLink.style.fontWeight = "bold";
-      repoLink.appendChild(document.createTextNode(`Repository`));
-      divForLinks.appendChild(repoLink);
+        const repoIgithub = document.createElement("i")
+        repoIgithub.className = "fa-brands fa-github"
 
-      const repoIstart = document.createElement("i")
-      repoIstart.className = "fa-solid fa-hourglass-start"
+        const repoLink = document.createElement("a");
+        repoLink.appendChild(repoIgithub)
+        repoLink.href = `https://github.com/JakubKrc/${repo["name-of-git"]}`
+        repoLink.target = "_blank";
+        repoLink.style.fontWeight = "bold";
+        repoLink.appendChild(document.createTextNode(`Repository`));
+        divForLinks.appendChild(repoLink);
 
-      const appLink = document.createElement("a");
-      appLink.appendChild(repoIstart)
-      appLink.href = `/${repo}`;
-      appLink.target = "_blank";
-      appLink.style.fontWeight = "bold";
-      appLink.appendChild(document.createTextNode(`Try in browser`));
-      divForLinks.appendChild(appLink);
+        const repoIstart = document.createElement("i")
+        repoIstart.className = "fa-solid fa-hourglass-start"
 
-      document.getElementById('repos-container').appendChild(div);
-      
-      fetch(`https://api.github.com/repos/JakubKrc/${repo}`, {
-      /*headers: token ? { Authorization: `token ${token}` } : {}*/
-      })
-        .then(response => response.json())
-        .then(data => {
-          const description = data.description || "No description available.";
-          spanDesc.textContent = description;
+        const appLink = document.createElement("a");
+        appLink.appendChild(repoIstart)
+        appLink.href = repo["demo-url"];
+        appLink.target = "_blank";
+        appLink.style.fontWeight = "bold";
+        appLink.appendChild(document.createTextNode(`Try in browser`));
+        divForLinks.appendChild(appLink);
+
+        document.getElementById('repos-container').appendChild(div);
+        
+        if (repo.desc != ""){
+          spanDesc.textContent = repo.desc
+          return
+        }
+
+        fetch(`https://api.github.com/repos/JakubKrc/${repo["name-of-git"]}`, {
+        /*headers: token ? { Authorization: `token ${token}` } : {}*/
         })
-        .catch(error => {
-          console.error("Error fetching repo description:", error);
-          document.getElementById("repo-description").textContent =
-            "Failed to fetch description. Check the console for errors.";
-        });
-    })
+          .then(response => response.json())
+          .then(data => {
+            const description = data.description || "No description available.";
+            spanDesc.textContent = description;
+          })
+          .catch(error => {
+            console.error("Error fetching repo description:", error);
+            document.getElementById("repo-description").textContent =
+              "Failed to fetch description. Check the console for errors.";
+          });
+      })
+
+    }
+    createProjects()
 
     const form = document.getElementById('contact-form')
     const msg = document.getElementById('form-msg')

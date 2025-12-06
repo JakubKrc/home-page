@@ -25,7 +25,7 @@ A minimal CI/CD workflow that:
 - Pulls the latest `main` branch  
 - Rebuilds and restarts Docker containers  
 
-## 🔒 Security Notes
+#### 🔒 Security Notes
 - SSL handled by Let's Encrypt
 - Contact form submits via secure Formspree endpoint  
 - Server access uses SSH keys only  
