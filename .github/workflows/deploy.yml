@@ -22,4 +22,4 @@ jobs:
             cd ~/home-page-app
             git pull origin main
 
-            docker compose up --build -d
+            docker compose up -d --force-recreate
