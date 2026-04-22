@@ -1,5 +1,19 @@
 [
     {
+        "name":"UBO — Shop",
+        "name-of-git":"ubo-shop",
+        "demo-url":"https://shop.ubo.jkjdev.eu/",
+        "desc":"",
+        "mobile-err":""
+    },
+    {
+        "name":"UBO — Admin Dashboard",
+        "name-of-git":"ubo-admin",
+        "demo-url":"https://admin.ubo.jkjdev.eu/",
+        "desc":"",
+        "mobile-err":""
+    },
+    {
         "name":"Crud for testing",
         "name-of-git":"crud-for-testing",
         "demo-url":"crud-for-testing",
