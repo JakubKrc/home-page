@@ -10,6 +10,7 @@ services:
       - ../njffunding:/usr/share/nginx/njffunding:ro
       - ../predeco:/usr/share/nginx/predeco:ro
       - ../hubleto:/usr/share/nginx/hubleto:ro
+      - ../hubleto-healthcare:/usr/share/nginx/sites/healthcare:ro
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - /var/www/certbot:/var/www/certbot
