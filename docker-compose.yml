@@ -7,7 +7,6 @@ services:
       - "443:443"
     volumes:
       - ./html:/usr/share/nginx/html
-      - ../njffunding:/usr/share/nginx/njffunding:ro
       - ../predeco:/usr/share/nginx/predeco:ro
       - ../hubleto:/usr/share/nginx/hubleto:ro
       - ../hubleto-healthcare:/usr/share/nginx/sites/healthcare:ro
